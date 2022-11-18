@@ -7,7 +7,7 @@ import type {
 } from './definitions';
 
 export class PlacePickerWeb extends WebPlugin implements PlacePickerPlugin {
-  async pickPlace(options: PlacePickerOptions): Promise<PlacePickerResults> {
-    return {} as any;
+  async pickPlace(_: PlacePickerOptions): Promise<PlacePickerResults> {
+    return JSON.stringify(_) as any;
   }
 }
