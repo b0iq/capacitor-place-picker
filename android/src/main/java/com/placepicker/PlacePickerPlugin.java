@@ -1,6 +1,4 @@
 package com.placepicker;
-
-import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
@@ -9,14 +7,14 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 @CapacitorPlugin(name = "PlacePicker")
 public class PlacePickerPlugin extends Plugin {
 
-    private PlacePicker implementation = new PlacePicker();
+    private PlacePicker implementation = null;
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
+    public void pickPlace(PluginCall call) {
+        if (implementation == null) {
+            implementation = new PlacePicker(this.getActivity());
+        }
 
-        JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
-        call.resolve(ret);
+        implementation.start(call);
     }
 }
